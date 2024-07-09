@@ -1,6 +1,6 @@
-const Book = require("./model");
+const author = require("./model");
 
-const addBook = async (req, res) => {
+const addAuthor = async (req, res) => {
   console.log("req.body: ", req.body);
   try {
     // const book = await Book.create({
@@ -9,7 +9,7 @@ const addBook = async (req, res) => {
     //   genre: req.body.genre,
     // });
 
-    const book = await Book.create(req.body);
+    const author = await author.create(req.body);
 
     res.status(201).json({ message: "success", book: book });
   } catch (error) {
@@ -17,9 +17,9 @@ const addBook = async (req, res) => {
   }
 };
 
-const getAllBooks = async (req, res) => {
+const getAllAuthors = async (req, res) => {
   try {
-    const books = await Book.findAll();
+    const authors = await Book.findAll();
 
     res.status(200).json({ message: "success", books: books });
   } catch (error) {
@@ -28,15 +28,15 @@ const getAllBooks = async (req, res) => {
 };
 const deleteBook = async (req, res) => {
   try {
-    const deleted = await Book.destroy({ title: req.body.title });
+    const book = await book.destroy();
     res.status(200).json({ message: "success", book: book });
   } catch (error) {
     res.status(501).json({ message: error.massage, error: error });
   }
-};
 
-module.exports = {
-  addBook: addBook,
-  getAllBooks: getAllBooks,
-  deleteBook: deleteBook,
+  module.exports = {
+    addBook: addBook,
+    getAllBooks: getAllBooks,
+    deleteBook: deleteBook,
+  };
 };
