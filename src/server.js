@@ -3,11 +3,15 @@ const express = require ("express");
 
 const port = process.env.PORT || 5001;
 
+const bookRouter = require("./books/routes")
+
 const Book = require("./books/model");
 
 const app = express()
 
 app.use(express.json());
+
+app.use("/.books",bookRouter);
 
 const syncTables = () =>{ 
     Book.sync();
