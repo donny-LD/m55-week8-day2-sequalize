@@ -11,9 +11,6 @@ const { addAuthor, } = require("./controllers");
 //http://localhost:5001/Authors/test
 authorRouter.post("/addAuthor", addAuthor);
 
-// authorRouter.get("/getAllAuthors", getAllAuthors);
-
-// authorRouter.delete("/deleteAuthor", deleteAuthor);
 
 
 

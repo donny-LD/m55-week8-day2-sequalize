@@ -1,13 +1,10 @@
 const Book = require("./model");
+const { param } = require("./routes");
 
 const addBook = async (req, res) => {
   console.log("req.body: ", req.body);
   try {
-    // const book = await Book.create({
-    //   title: req.body.title,
-    //   author: req.body.author,
-    //   genre: req.body.genre,
-    // });
+  
 
     const book = await Book.create(req.body);
 
@@ -28,15 +25,28 @@ const getAllBooks = async (req, res) => {
 };
 const deleteBook = async (req, res) => {
   try {
-    const deleted = await Book.destroy({ title: req.body.title });
+    const book = await Book.destroy({ title: req.body.title });
     res.status(200).json({ message: "success", book: book });
   } catch (error) {
     res.status(501).json({ message: error.massage, error: error });
   }
 };
 
+const getBookByTitle = async (req, res) => {
+  try { 
+    console.log("req.params: ", req.params);
+
+    const book = await Book.findOne({where: { title: req.params.title }})
+
+     res.status(200).json({ message: "success", book: book, params: req.params});
+  } catch (error) {
+    res.status(501).json({ message: error.massage, error: error });
+  }
+}
+
 module.exports = {
   addBook: addBook,
   getAllBooks: getAllBooks,
   deleteBook: deleteBook,
+  getBookByTitle: getBookByTitle
 };

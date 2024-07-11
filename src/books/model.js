@@ -1,4 +1,4 @@
-const { DataTypes, STRING } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 const sequelize = require("../db/connection");
 // const { toDefaultValue } = require("sequelize/lib/utils");
