@@ -16,12 +16,14 @@ app.use(express.json());
 
 app.use("/books", bookRouter);
 
-// app.use("/authors",authorRouter);
+app.use("/authors",authorRouter);
 
 const syncTables = () => {
   Book.sync();
-  // Author.sync();
+  Author.sync();
 };
+
+
 
 app.get("/health", (req, res) => {
   res.status(200).json({ message: "API is healthy" });

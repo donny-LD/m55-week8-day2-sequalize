@@ -1,4 +1,4 @@
-const author = require("./model");
+const Author = require("./model");
 
 const addAuthor = async (req, res) => {
   console.log("req.body: ", req.body);
@@ -9,34 +9,33 @@ const addAuthor = async (req, res) => {
     //   genre: req.body.genre,
     // });
 
-    const author = await author.create(req.body);
+    const author = await Author.create(req.body);
 
-    res.status(201).json({ message: "success", book: book });
+    res.status(201).json({ message: "success", author: author });
   } catch (error) {
-    res.status(501).json({ message: error.massage, error: error });
+    res.status(500).json({ message: error.massage, error: error });
   }
 };
 
-const getAllAuthors = async (req, res) => {
-  try {
-    const authors = await Book.findAll();
+// const getAllAuthors = async (req, res) => {
+//   try {
+//     const authors = await Author.findAll();
 
-    res.status(200).json({ message: "success", books: books });
-  } catch (error) {
-    res.status(501).json({ message: error.massage, error: error });
-  }
-};
-const deleteBook = async (req, res) => {
-  try {
-    const book = await book.destroy();
-    res.status(200).json({ message: "success", book: book });
-  } catch (error) {
-    res.status(501).json({ message: error.massage, error: error });
-  }
+//     res.status(200).json({ message: "success", authors: authors });
+//   } catch (error) {
+//     res.status(501).json({ message: error.massage, error: error });
+//   }
+// };
+// const deleteAuthor = async (req, res) => {
+//   try {
+//     const Author = await author.destroy();
+//     res.status(200).json({ message: "success", author: author });
+//   } catch (error) {
+//     res.status(501).json({ message: error.massage, error: error });
+//  }
 
   module.exports = {
-    addBook: addBook,
-    getAllBooks: getAllBooks,
-    deleteBook: deleteBook,
+    addAuthor: addAuthor,
+    // getAllAuthors: getAllAuthors,
+    // deleteAuthor: deleteAuthor,
   };
-};
