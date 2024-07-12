@@ -6,19 +6,11 @@ const sequelize = require("../db/connection");
 const Author = sequelize.define(
   "Author",
   {
-    // title: {
-    //   type: DataTypes.STRING,
-    //   unique: true,
-    //   allowNull: false,
-    // },
-    // author: {
-    //   type: DataTypes.STRING,
-    //   defaultValue: "written by some author",
-    // },
-    // genre: {
-    //   type: DataTypes.STRING,
-    //   defaultValue: "some genre",
-    // },
+   authorName : {
+    type: DataTypes.STRING,
+    allowNull:false,
+    unique: true,
+   }
   },
   { timestamps: false }
 );
