@@ -23,9 +23,7 @@ try{
   Author.hasMany(Book);
   Book.belongsTo(Author);
   
-  // Author.belongsToMany(Book,{through:"BookAuthor"});
-  // Book.belongsToMany(Author,{through:"BookAuthor"});
-
+ 
     await sequelize.sync({alter: true});
 
 
@@ -34,8 +32,7 @@ try{
 } catch (error) {
   console.error(" Failed to synced tavles", error)
 }
-//   Book.sync({alter: true});
-  // Author.sync({alter: true});
+
 };
 
 app.get("/health", (req, res) => {

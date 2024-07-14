@@ -6,6 +6,7 @@ const {
   getAllBooks,
   deleteBook,
   getBookByTitle,
+  deleteAllBooks,
 } = require("./controllers");
 
 // //http://localhost:5001/books/test
@@ -19,6 +20,8 @@ bookRouter.post("/addBook", addBook);
 bookRouter.get("/getAllBooks", getAllBooks);
 
 bookRouter.delete("/deleteBook", deleteBook);
+
+bookRouter.deleteAllBooks("/deleteAllBooks", deleteAllBooks);
 
 bookRouter.get("/getBookByTitle/:title", getBookByTitle);
 

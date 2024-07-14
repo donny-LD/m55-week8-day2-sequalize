@@ -30,22 +30,43 @@ const deleteBook = async (req, res) => {
       return;
     }
 
-    // if (!someCondition) {
-    //   res.status(555).json({ message: error.massage, error: error });
-    //   return;
-    // }
-
+  
     res.status(204).json({ message: "success" });
   } catch (error) {}
 };
-// await User.destroy({
-//   truncate: true,
-// });
+
+
+const deleteAllBooks = async (req, res) => {
+  try {
+
+    const deleteBooks = await Books.destroy({
+      truncate: true,
+    });
+
+
+    res.status(200).json({ message: "All Books have been deleted." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 const updateBook = async (req, res) => {
   try {
-    //  const update = await Book.
-  } catch (error) {}
+    const { title } = req.params;
+    const { newAuthor } = req.body;
+
+  
+    const result = await Book.updateOne({ title }, { author: newAuthor });
+
+    if (result.nModified === 0) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    res.status(200).json({ message: "Book updated successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const getBookByTitle = async (req, res) => {
@@ -67,4 +88,6 @@ module.exports = {
   getAllBooks: getAllBooks,
   deleteBook: deleteBook,
   getBookByTitle: getBookByTitle,
+  deleteAllBooks: deleteAllBooks,
+  updateBook: updateBook,
 };
