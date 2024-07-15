@@ -30,19 +30,15 @@ const deleteBook = async (req, res) => {
       return;
     }
 
-  
     res.status(204).json({ message: "success" });
   } catch (error) {}
 };
 
-
 const deleteAllBooks = async (req, res) => {
   try {
-
     const deleteBooks = await Books.destroy({
       truncate: true,
     });
-
 
     res.status(200).json({ message: "All Books have been deleted." });
   } catch (error) {
@@ -50,25 +46,30 @@ const deleteAllBooks = async (req, res) => {
   }
 };
 
-
 const updateBook = async (req, res) => {
+  const { title } = req.params;
+  const updateData = req.body;
+
   try {
-    const { title } = req.params;
-    const { newAuthor } = req.body;
+    if (!Object.keys(updateData).length)
+      throw new Error("No meaningful update data provided");
 
-  
-    const result = await Book.updateOne({ title }, { author: newAuthor });
+    const updatedBook = await Book.findOneAndUpdate(
+      { title },
+      { $set: updateData },
+      { new: true, runValidators: true }
+    );
 
-    if (result.nModified === 0) {
+    if (!updatedBook)
       return res.status(404).json({ message: "Book not found" });
-    }
 
-    res.status(200).json({ message: "Book updated successfully" });
+    res
+      .status(200)
+      .json({ message: "Book updated successfully", book: updatedBook });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
-
 const getBookByTitle = async (req, res) => {
   try {
     console.log("req.params: ", req.params);

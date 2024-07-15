@@ -7,22 +7,22 @@ const {
   deleteBook,
   getBookByTitle,
   deleteAllBooks,
+  updateBook,
 } = require("./controllers");
 
-// //http://localhost:5001/books/test
-// bookRouter.get("/test", async (req,res) => {
-//     res.status(200).json({massage: " test a ok!" });
-// });
 
-//http://localhost:5001/books/test
+
 bookRouter.post("/addBook", addBook);
 
 bookRouter.get("/getAllBooks", getAllBooks);
 
 bookRouter.delete("/deleteBook", deleteBook);
 
-bookRouter.deleteAllBooks("/deleteAllBooks", deleteAllBooks);
+bookRouter.delete("/deleteAllBooks", deleteAllBooks);
+
+bookRouter.put("/updateBook", updateBook);
 
 bookRouter.get("/getBookByTitle/:title", getBookByTitle);
 
+bookRouter.
 module.exports = bookRouter;
